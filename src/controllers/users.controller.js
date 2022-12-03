@@ -1,10 +1,21 @@
 const { UserService } = require("../services");
+const welcomeTemplate = require('../templates/welcome')
+const transporter = require('../utils/mailer');
 
 const userSingUp = async (req, res, next) => {
   try {
     const dataUser = req.body;
     const result = await UserService.create(dataUser);
     res.status(201).json(result);
+
+    transporter.sendMail({
+      from: "<tsergior@gmail.com.com>",
+      to: result.email,
+      subject: "Bienvenido a tu E-commerce favorito (TESTING)",
+      text: `Bienvenido a la mejor aplicación E-commerce de Colombia`,
+      html: welcomeTemplate(),
+    });
+
   } catch (error) {
     next({
       status: 400,
