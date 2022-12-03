@@ -2,7 +2,7 @@ const db = require('../utils/database');
 const {DataTypes} = require('sequelize');
 const bcrypt = require('bcrypt');
 
-const Users = db.define('users', {
+const User = db.define('users', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -16,7 +16,10 @@ const Users = db.define('users', {
     email: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true
+        unique: true,
+        validate: {
+            isEmail: true
+        }
     },
     password: {
         type: DataTypes.STRING,
@@ -34,4 +37,4 @@ const Users = db.define('users', {
   }
   )
 
-  module.exports = Users;
+  module.exports = User;
