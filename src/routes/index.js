@@ -52,9 +52,6 @@ const authRoutes = require('./auth.routes')
  *    Products:
  *       type: object
  *       properties:
- *         idApi:
- *           type: string
- *           example: string
  *         name:
  *           type: string
  *           example: string
@@ -64,6 +61,9 @@ const authRoutes = require('./auth.routes')
  *         availableQty:
  *           type: number
  *           example: 10000
+ *         status:
+ *           type: boolean
+ *           example: true
  *  securitySchemes:
  *     bearerAuth:
  *        type: http
@@ -151,6 +151,125 @@ const authRoutes = require('./auth.routes')
  *       400:
  *          description: "Verify credentials for login"
  */
+
+/**
+ * @openapi
+ * /api/v1/users:
+ *  get:
+ *    summary: Get all users from the database. You will need to be authenticated.
+ *    tags: [Users]
+ *    responses:
+ *      200:
+ *        description: These are all the users registered
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: array
+ *              items:
+ *                $ref: '#/components/schemas/RespUser'
+ *    security:
+ *        - bearerAuth: []
+ */
+
+/**
+ * @openapi
+ * /api/v1/users/{id}:
+ *  delete:
+ *    summary: Delete one user.
+ *    tags: [Users]
+ *    parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: It is the user id
+ *    security:
+ *        - bearerAuth: []
+ *    responses:
+ *      200:
+ *        description: User selected was updated
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              $ref: '#/components/schemas/Users'
+ *      404:
+ *        description: User not found, please verify
+ */
+
+
+/**
+ * @openapi
+ * /api/v1/users/{id}:
+ *  put:
+ *    summary: Update one user.
+ *    tags: [Users]
+ *    parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: It is the user id
+ *    security:
+ *        - bearerAuth: []
+ *    responses:
+ *      200:
+ *        description: User selected was updated
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              $ref: '#/components/schemas/Users'
+ *      404:
+ *        description: User not found, please verify
+ */
+
+
+/**
+ * @openapi
+ * /api/v1/products:
+ *   post:
+ *     summary: Create a new product into the app
+ *     tags: [Products]
+ *     requestBody:
+ *       description: For creating a new product this info.
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             $ref: '#/components/schemas/Products'
+ *     responses:
+ *       200:
+ *         description: Product Created
+ *       400:
+ *          description: "Verify data"
+ */
+
+/**
+ * @openapi
+ * /api/v1/products:
+ *  get:
+ *    summary: Get all products from the database. You will need to be authenticated.
+ *    tags: [Products]
+ *    responses:
+ *      200:
+ *        description: These are all the products registered
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: array
+ *              items:
+ *                $ref: '#/components/schemas/Products'
+ *    security:
+ *        - bearerAuth: []
+ */
+
+
+
+
 
 
 
