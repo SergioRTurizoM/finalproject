@@ -65,6 +65,15 @@ const cartRoutes = require('./cart.routes')
  *         status:
  *           type: boolean
  *           example: true
+ *    Cart:
+ *       type: object
+ *       properties:
+ *         user_id:
+ *           type: number
+ *           example: 1
+ *         totalPrice:
+ *           type: number
+ *           example: 500000
  *  securitySchemes:
  *     bearerAuth:
  *        type: http
@@ -292,6 +301,75 @@ const cartRoutes = require('./cart.routes')
  *            schema:
  *              type: object
  *              $ref: '#/components/schemas/Products'
+ *      404:
+ *        description: User not found, please verify
+ */
+
+
+/**
+ * @openapi
+ * /api/v1/carts:
+ *   post:
+ *     summary: Create a new cart into the db
+ *     tags: [Carts]
+ *     requestBody:
+ *       description: For creating a new cart .
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             $ref: '#/components/schemas/Cart'
+ *     responses:
+ *       200:
+ *         description: Cart Created
+ *       400:
+ *          description: "Verify data"
+ */
+
+/**
+ * @openapi
+ * /api/v1/carts:
+ *  get:
+ *    summary: Get all carts from the database.
+ *    tags: [Carts]
+ *    responses:
+ *      200:
+ *        description: These are all the carts registered
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: array
+ *              items:
+ *                $ref: '#/components/schemas/Cart'
+ *    security:
+ *        - bearerAuth: []
+ */
+
+
+/**
+ * @openapi
+ * /api/v1/carts/{id}:
+ *  delete:
+ *    summary: Delete one cart.
+ *    tags: [Carts]
+ *    parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: It is the cart id
+ *    security:
+ *        - bearerAuth: []
+ *    responses:
+ *      200:
+ *        description: Selected cart was deleted
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              $ref: '#/components/schemas/Cart'
  *      404:
  *        description: User not found, please verify
  */
