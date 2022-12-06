@@ -14,20 +14,37 @@ const createProduct = async (req, res, next) => {
   }
 };
 
-const getAllProducts = async(req, res, next)=>{
-    try {
-        const result = await ProductService.getAllProducts();
-        res.status(200).json(result)
-    } catch (error) {
-        next({
-            status: 400,
-            errorContent: error,
-            message: 'Hubo un error obteniendo lista de productos'
-        })
-    }
+const getAllProducts = async (req, res, next) => {
+  try {
+    const result = await ProductService.getAllProducts();
+    res.status(200).json(result);
+  } catch (error) {
+    next({
+      status: 400,
+      errorContent: error,
+      message: "Hubo un error obteniendo lista de productos",
+    });
+  }
+};
+
+const deleteProduct = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    console.log(id);
+    const deleting = await ProductService.deleteProduct(id)
+        res.json(`El producto con id ${id} ha sido eliminado exitosamente`)
+
+} catch (error) {
+    next({
+        status: 400,
+        errorContent: error,
+        message: "Hubo un error eliminando producto",
+      });
 }
+};
 
 module.exports = {
   createProduct,
-  getAllProducts
+  deleteProduct,
+  getAllProducts,
 };

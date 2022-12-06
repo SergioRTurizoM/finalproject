@@ -268,6 +268,34 @@ const authRoutes = require('./auth.routes')
  */
 
 
+/**
+ * @openapi
+ * /api/v1/products/{id}:
+ *  delete:
+ *    summary: Delete one product.
+ *    tags: [Products]
+ *    parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: It is the product id
+ *    security:
+ *        - bearerAuth: []
+ *    responses:
+ *      200:
+ *        description: Selected product was deleted
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              $ref: '#/components/schemas/Products'
+ *      404:
+ *        description: User not found, please verify
+ */
+
+
 
 
 

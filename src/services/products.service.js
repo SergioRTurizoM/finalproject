@@ -19,6 +19,19 @@ class ProductService {
         }
     }
 
+    static async deleteProduct(id){
+        try {
+            const result = await Product.destroy({
+                where: { id}
+            })
+            return result
+        } catch (error) {
+            throw error
+        }
+    }
+
+    
+
 }
 
 

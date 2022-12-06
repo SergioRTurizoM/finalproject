@@ -1,6 +1,8 @@
 const { User, Cart, Product, Order } = require("./index");
 
 const initModel = () => {
+
+
   Order.belongsTo(User, { as: "user", foreignKey: "user_id" });
 
 /*   User.hasMany(Product, { foreignKey: "user_id" }); */
@@ -10,6 +12,7 @@ const initModel = () => {
   Product.belongsToMany(Cart, { through: "productincart" });
 
   Product.belongsToMany(Order, { through: "productinorder" });
+
 };
 
 module.exports = initModel;
