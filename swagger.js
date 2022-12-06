@@ -8,7 +8,7 @@ const options = {
       title: "Api Ecommerce",
       version: "1.0.0",
       description:
-        "API proyecto Academlo",
+        "API for a Ecommerce project in Academlo Programming School made by Sergio Turizo. Please create a user, then log into the app and copy the token from response. After that, please paste the token into the Authorize input. Enjoy!",
     },
   },
   apis: [
