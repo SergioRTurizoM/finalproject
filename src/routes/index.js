@@ -1,8 +1,8 @@
 const usersRoutes = require("./users.routes");
-const productsRoutes = require('./products.routes');
-const authRoutes = require('./auth.routes')
-const cartRoutes = require('./cart.routes')
-
+const productsRoutes = require("./products.routes");
+const authRoutes = require("./auth.routes");
+const cartRoutes = require("./cart.routes");
+const orderRoutes = require('./order.routes')
 
 /**
  * @openapi
@@ -45,10 +45,10 @@ const cartRoutes = require('./cart.routes')
  *            type: string
  *            example: abc222
  *          createdAt:
- *            type: string     
+ *            type: string
  *            example: 2022-12-05T19:14:46.864Z
  *          updatedAt:
- *            type: string     
+ *            type: string
  *            example: 2022-12-05T19:14:46.864Z
  *    Products:
  *       type: object
@@ -74,13 +74,24 @@ const cartRoutes = require('./cart.routes')
  *         totalPrice:
  *           type: number
  *           example: 500000
+ *    Order:
+ *       type: object
+ *       properties:
+ *         user_id:
+ *           type: number
+ *           example: 1
+ *         totalPrice:
+ *           type: number
+ *           example: 500000
+ *         status:
+ *           type: boolean
+ *           example: true
  *  securitySchemes:
  *     bearerAuth:
  *        type: http
  *        scheme: bearer
  *        bearerFormat: JWT
  */
-
 
 /**
  * @openapi
@@ -114,7 +125,6 @@ const cartRoutes = require('./cart.routes')
  *       400:
  *          description: "Verify data"
  */
-
 
 /**
  * @openapi
@@ -208,7 +218,6 @@ const cartRoutes = require('./cart.routes')
  *        description: User not found, please verify
  */
 
-
 /**
  * @openapi
  * /api/v1/users/{id}:
@@ -236,7 +245,6 @@ const cartRoutes = require('./cart.routes')
  *        description: User not found, please verify
  */
 
-
 /**
  * @openapi
  * /api/v1/products:
@@ -251,6 +259,8 @@ const cartRoutes = require('./cart.routes')
  *           schema:
  *             type: object
  *             $ref: '#/components/schemas/Products'
+ *     security:
+ *        - bearerAuth: []
  *     responses:
  *       200:
  *         description: Product Created
@@ -276,7 +286,6 @@ const cartRoutes = require('./cart.routes')
  *    security:
  *        - bearerAuth: []
  */
-
 
 /**
  * @openapi
@@ -305,7 +314,6 @@ const cartRoutes = require('./cart.routes')
  *        description: User not found, please verify
  */
 
-
 /**
  * @openapi
  * /api/v1/carts:
@@ -320,6 +328,8 @@ const cartRoutes = require('./cart.routes')
  *           schema:
  *             type: object
  *             $ref: '#/components/schemas/Cart'
+ *     security:
+ *        - bearerAuth: []
  *     responses:
  *       200:
  *         description: Cart Created
@@ -345,7 +355,6 @@ const cartRoutes = require('./cart.routes')
  *    security:
  *        - bearerAuth: []
  */
-
 
 /**
  * @openapi
@@ -376,13 +385,80 @@ const cartRoutes = require('./cart.routes')
 
 
 
+/**
+ * @openapi
+ * /api/v1/orders:
+ *   post:
+ *     summary: Create a new order into the db
+ *     tags: [Orders]
+ *     requestBody:
+ *       description: For creating a new order .
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             $ref: '#/components/schemas/Order'
+ *     security:
+ *        - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Order Created
+ *       400:
+ *          description: "Verify data"
+ */
+
+/**
+ * @openapi
+ * /api/v1/orders:
+ *  get:
+ *    summary: Get all orders from the database.
+ *    tags: [Orders]
+ *    responses:
+ *      200:
+ *        description: These are all the orders registered
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: array
+ *              items:
+ *                $ref: '#/components/schemas/Order'
+ *    security:
+ *        - bearerAuth: []
+ */
+
+/**
+ * @openapi
+ * /api/v1/orders/{id}:
+ *  delete:
+ *    summary: Delete one order.
+ *    tags: [Orders]
+ *    parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: It is the order id
+ *    security:
+ *        - bearerAuth: []
+ *    responses:
+ *      200:
+ *        description: Selected order was deleted
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              $ref: '#/components/schemas/Order'
+ *      404:
+ *        description: User not found, please verify
+ */
 
 
-
-
-module.exports= {
-    authRoutes,
-    cartRoutes,
-    usersRoutes,
-    productsRoutes
-}
+module.exports = {
+  authRoutes,
+  cartRoutes,
+  usersRoutes,
+  productsRoutes,
+  orderRoutes
+};

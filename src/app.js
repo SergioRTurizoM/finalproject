@@ -4,7 +4,7 @@ const cors = require("cors");
 const db = require("./utils/database.js");
 const handleError = require("./middlewares/error.middleware");
 const initModel = require("./models/initModels.models");
-const { usersRoutes, productsRoutes, authRoutes, cartRoutes } = require("./routes");
+const { usersRoutes, productsRoutes, authRoutes, cartRoutes, orderRoutes } = require("./routes");
 
 const app = express();
 
@@ -33,6 +33,7 @@ app.use(urlBasica, usersRoutes);
 app.use(urlBasica, authRoutes);
 app.use(urlBasica, productsRoutes);
 app.use(urlBasica, cartRoutes);
+app.use(urlBasica, orderRoutes);
 
 app.use(handleError);
 

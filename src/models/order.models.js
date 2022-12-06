@@ -8,6 +8,10 @@ const Order = db.define('order', {
         autoIncrement: true,
         allowNull: false
     },
+    user_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
     totalPrice: {
         type: DataTypes.INTEGER,
         allowNull: false

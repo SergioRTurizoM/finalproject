@@ -6,6 +6,11 @@ const {
 } = require("./products.controllers");
 const { userLogin } = require("./auth.controllers");
 const { createCart, getAllCarts, deleteCart } = require("./cart.controllers");
+const {
+  createOrder,
+  getAllOrders,
+  deleteOrder,
+} = require("./order.controllers");
 
 module.exports = {
   userSingUp,
@@ -18,4 +23,7 @@ module.exports = {
   createCart,
   getAllCarts,
   deleteCart,
+  createOrder,
+  getAllOrders,
+  deleteOrder,
 };
